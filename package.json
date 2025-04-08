@@ -1,0 +1,22 @@
+{
+  "name": "liftoff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "@libp2p/kad-dht": "^14.2.15",
+    "@libp2p/tcp": "^10.1.8",
+    "ipfs-core": "^0.18.1",
+    "libp2p": "^2.8.2",
+    "multiaddr": "^10.0.1",
+    "multiformats": "^13.3.2",
+    "orbit-db": "^0.29.0"
+  }
+}
