@@ -2,8 +2,12 @@
 import { create } from 'ipfs-core'
 import OrbitDB from 'orbit-db'
 import readline from 'readline'
-import { multiaddr } from 'multiaddr'
+import { multiaddr } from "@multiformats/multiaddr";
 
+// replace with node1's address
+const NODE1_ADDR = multiaddr(
+  "/ip4/192.168.31.60/tcp/45182/ws/p2p/12D3KooWFQcQap8YnTCtLPPtjCB8UBfM44ip5PpKHFkfV16SpgRX",
+);
 const SHARED_DB_ADDR = '/orbitdb/zdpuAmdeCMg8Aa1hRPLHg7x55vFdjMrYWjkqZPuArgncSA35H/shared-db'
 const PUBLIC_BOOTSTRAP = multiaddr('/ip4/35.220.212.56/tcp/4001/p2p/12D3KooWJ6MTkNM8Bu8DzNiRm1GY3Wqh8U8Pp1zRWap6xY3MvsNw')
 
@@ -38,6 +42,14 @@ async function main() {
 
   const id = await ipfs.id()
   console.log(`🆔 [Node2] IPFS ID: ${id.id}`)
+
+  try {
+    console.log(`🌐 [Node2] 尝试连接到 Node1:`, NODE1_ADDR)
+    await ipfs.swarm.connect(NODE1_ADDR)
+    console.log('✅ [Node2] 成功连接到 Node1')
+  } catch (err) {
+    console.warn('⚠️ [Node2] 无法连接到 Node1:', err.message)
+  }
 
   // ✅ 等待至少一个 peer 再打开数据库
   await waitForPeers(ipfs, 1)
